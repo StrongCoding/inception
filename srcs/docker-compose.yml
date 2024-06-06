@@ -1,0 +1,32 @@
+services:
+  nginx:
+    restart: unless-stopped
+    build: requirements/nginx
+    volumes:
+      - shared_volume:/var/www/html
+    ports:
+      - 80:80
+    depends_on:
+      - wordpressphp
+
+  wordpressphp:
+    restart: unless-stopped
+    build: requirements/wordpress
+    volumes:
+      - shared_volume:/var/www/html
+    ports:
+      - 9000:9000
+    depends_on:
+      - mariadb
+
+  mariadb:
+    restart: unless-stopped
+    build: requirements/mariadb
+    volumes:
+      - database_volume:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  shared_volume:
+  database_volume:
