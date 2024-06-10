@@ -18,6 +18,8 @@ services:
       - 9000:9000
     depends_on:
       - mariadb
+    env_file:
+      - .env
 
   mariadb:
     restart: unless-stopped
@@ -26,6 +28,8 @@ services:
       - database_volume:/var/lib/mysql
     ports:
       - 3306:3306
+    env_file:
+      - .env
 
 volumes:
   shared_volume:

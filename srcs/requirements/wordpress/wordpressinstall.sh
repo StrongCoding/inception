@@ -1,7 +1,9 @@
 #!/bin/sh
 cd /var/www/html
 
-php-fpm7.4 -D
+#php-fpm7.4 -D
+sleep 1
+
 
 if [ -f ./wp-config.php ]
 then
@@ -19,4 +21,4 @@ else
 fi
 
 # Execute the command passed as arguments to the script
-#exec "$@"
+exec "$@"

@@ -1,14 +1,21 @@
 #!/bin/bash
+#folder for process id
+mkdir -p /run/mysqld
+# Change the ownership of the folder
+chown -R mysql:mysql /run/mysqld
 
-# Check if the database exists
-DB_EXISTS=$(mysql -u root -p$MYSQL_ROOT_PASSWORD -e "SHOW DATABASES LIKE '"$MYSQL_DATABASE"';" | grep "$MYSQL_DATABASE" > /dev/null; echo "$?")
+# Start the MariaDB service
+/etc/init.d/mariadb start
 
-# If the database does not exist, create it and the user
-if [ $DB_EXISTS -eq 1 ]; then
-    mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $MYSQL_DATABASE;"
-    mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
-    mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;"
-fi
+
+echo "hello"
+echo "$MYSQL_DATABASE"
+mysql -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
+mysql -e "CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
+mysql -e "GRANT ALL ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';"
+mysql -e "FLUSH PRIVILEGES;"
+
+/etc/init.d/mariadb stop
 
 # Execute the command passed as arguments to the script
 exec "$@"
