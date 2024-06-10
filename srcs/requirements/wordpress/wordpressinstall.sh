@@ -19,4 +19,4 @@ else
 fi
 
 # Execute the command passed as arguments to the script
-exec "$@"
+#exec "$@"
