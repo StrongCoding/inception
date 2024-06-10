@@ -6,8 +6,14 @@ services:
       - shared_volume:/var/www/html
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - wordpressphp
+    secrets:
+      - dninception.crt
+      - dninception.key
+      - dninception.dhparam.pem
+      - fullchain.pem
 
   wordpressphp:
     restart: unless-stopped
@@ -20,6 +26,12 @@ services:
       - mariadb
     env_file:
       - .env
+    secrets:
+      - db_wp_host
+      - db_wp_admin
+      - db_wp_pass
+      - db_wp_email
+      - db_wp_url
 
   mariadb:
     restart: unless-stopped
@@ -30,7 +42,37 @@ services:
       - 3306:3306
     env_file:
       - .env
+    secrets:
+      - db_password
+      - db_user
+      - db_name
 
 volumes:
   shared_volume:
   database_volume:
+
+secrets:
+  db_password:
+    file: ../secrets/mysql_password.txt
+  db_user:
+    file: ../secrets/mysql_user.txt
+  db_name:
+    file: ../secrets/mysql_database.txt
+  db_wp_host:
+    file: ../secrets/wordpress_db_host.txt
+  db_wp_admin:
+    file: ../secrets/wordpress_admin_user.txt
+  db_wp_pass:
+    file: ../secrets/wordpress_admin_password.txt
+  db_wp_email:
+    file: ../secrets/wordpress_admin_email.txt
+  db_wp_url:
+    file: ../secrets/wordpress_url.txt
+  dninception.crt:
+    file: ../secrets/dninception.crt
+  dninception.key:
+    file: ../secrets/dninception.key
+  dninception.dhparam.pem:
+    file: ../secrets/dninception.dhparam.pem
+  fullchain.pem:
+    file: ../secrets/fullchain.pem
