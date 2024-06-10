@@ -76,3 +76,6 @@ secrets:
     file: ../secrets/dninception.dhparam.pem
   fullchain.pem:
     file: ../secrets/fullchain.pem
+networks:
+  dninception:
+    driver: bridge
