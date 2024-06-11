@@ -1,3 +1,5 @@
+.phony: all build stop clean fclean prune fprune
+
 all:
 	mkdir /home/$(USER)/data/
 	mkdir /home/$(USER)/data/database_volume
