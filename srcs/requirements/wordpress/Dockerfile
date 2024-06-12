@@ -17,6 +17,4 @@ COPY wordpressinstall.sh /tmp/wordpressinstall.sh
 
 ENTRYPOINT ["/bin/bash", "/tmp/wordpressinstall.sh"]
 
-EXPOSE 9000
-
 CMD ["php-fpm7.4", "-F"]

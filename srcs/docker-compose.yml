@@ -5,7 +5,6 @@ services:
     volumes:
       - shared_volume:/var/www/html
     ports:
-      - 80:80
       - 443:443
     depends_on:
       - wordpressphp
@@ -20,8 +19,6 @@ services:
     build: requirements/wordpress
     volumes:
       - shared_volume:/var/www/html
-    ports:
-      - 9000:9000
     depends_on:
       - mariadb
     env_file:
@@ -38,8 +35,6 @@ services:
     build: requirements/mariadb
     volumes:
       - database_volume:/var/lib/mysql
-    ports:
-      - 3306:3306
     env_file:
       - .env
     secrets:
