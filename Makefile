@@ -4,7 +4,7 @@ all:
 	-mkdir /home/$(USER)/data/
 	-mkdir /home/$(USER)/data/database_volume
 	-mkdir /home/$(USER)/data/shared_volume
-	docker-compose -f srcs/docker-compose.yml up -d
+	docker-compose -f srcs/docker-compose.yml up
 
 build:
 	docker-compose -f srcs/docker-compose.yml build

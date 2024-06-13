@@ -2,7 +2,7 @@
 cd /var/www/html
 
 #php-fpm7.4 -D
-sleep 1
+sleep 11
 
 
 if [ -f ./wp-config.php ]

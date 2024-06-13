@@ -1,12 +1,13 @@
-FROM debian:bullseye
+FROM alpine:3.19
 
-
-RUN apt-get update && apt-get install -y mariadb-server
+RUN apk update && apk add mariadb mariadb-client bash openrc
 
 COPY mdbsetup.sh /tmp/mdbsetup.sh
-COPY conf/my.cnf /etc/mysql/mariadb.conf.d/my.cnf
+COPY conf/my.cnf /etc/my.cnf.d/my.cnf
 
 ENTRYPOINT ["/bin/bash", "/tmp/mdbsetup.sh"]
+
+EXPOSE 3306
 
 #keeps mariadb running
 CMD ["mysqld_safe"]
