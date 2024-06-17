@@ -1,7 +1,9 @@
 services:
   nginx:
     restart: unless-stopped
-    build: requirements/nginx
+    build:
+      context: requirements/nginx
+      dockerfile: Dockerfile
     volumes:
       - shared_volume:/var/www/html
     ports:
@@ -13,6 +15,7 @@ services:
       - dninception.key
       - dninception.dhparam.pem
       - fullchain.pem
+    container_name: nginx
 
   wordpressphp:
     restart: unless-stopped
@@ -29,6 +32,7 @@ services:
       - db_wp_pass
       - db_wp_email
       - db_wp_url
+    container_name: wordpressphp
 
   mariadb:
     restart: unless-stopped
@@ -41,6 +45,7 @@ services:
       - db_password
       - db_user
       - db_name
+    container_name: mariadb
 
 volumes:
   shared_volume:

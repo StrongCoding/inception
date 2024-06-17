@@ -6,9 +6,9 @@ chown -R mysql:mysql /run/mysqld
 
 # Start the MariaDB service
 #mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-
+echo "installing MariaDB service"
 mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-
+echo "done installing MariaDB service"
 echo "USE mysql;" >> init.sql
 echo "FLUSH PRIVILEGES;" >> init.sql
 echo "CREATE DATABASE IF NOT EXISTS $( cat /run/secrets/db_name);" >> init.sql
