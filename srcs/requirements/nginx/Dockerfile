@@ -1,7 +1,7 @@
-FROM debian:bullseye
+FROM alpine:3.19
 
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/http.d/default.conf
 
-RUN apt-get update && apt-get install -y nginx
+RUN apk update && apk add bash nginx
 
 CMD ["nginx", "-g", "daemon off;"]
