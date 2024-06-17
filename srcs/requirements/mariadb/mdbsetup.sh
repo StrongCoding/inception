@@ -1,13 +1,6 @@
 #!/bin/bash
 #folder for process id
-mkdir -p /run/mysqld
-# Change the ownership of the folder
-chown -R mysql:mysql /run/mysqld
 
-# Start the MariaDB service
-#mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-echo "installing MariaDB service"
-mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 echo "done installing MariaDB service"
 echo "USE mysql;" >> init.sql
 echo "FLUSH PRIVILEGES;" >> init.sql
