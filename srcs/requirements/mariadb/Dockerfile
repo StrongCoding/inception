@@ -1,16 +1,13 @@
 FROM alpine:3.19
 
-RUN apk update && apk add mariadb mariadb-client bash openrc
-RUN mkdir -p /run/mysqld && \
-# Change the ownership of the folder
-chown -R mysql:mysql /run/mysqld && \
+COPY conf/my.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-# Start the MariaDB service
-#mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-mysql_install_db --user=mysql --basedir=/usr --datadir=/var
+RUN apk update && apk add mariadb mariadb-client bash openrc && \
+mkdir -p /run/mysqld && \
+chown -R mysql:mysql /run/mysqld && \
+mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 
 COPY mdbsetup.sh /tmp/mdbsetup.sh
-COPY conf/my.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 ENTRYPOINT ["/bin/bash", "/tmp/mdbsetup.sh"]
 

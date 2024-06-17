@@ -1,7 +1,5 @@
 #!/bin/bash
-#folder for process id
 
-echo "done installing MariaDB service"
 echo "USE mysql;" >> init.sql
 echo "FLUSH PRIVILEGES;" >> init.sql
 echo "CREATE DATABASE IF NOT EXISTS $( cat /run/secrets/db_name);" >> init.sql
