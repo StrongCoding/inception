@@ -4,7 +4,7 @@ all:
 	-mkdir /home/$(USER)/data/
 	-mkdir /home/$(USER)/data/database_volume
 	-mkdir /home/$(USER)/data/shared_volume
-	docker-compose -f srcs/docker-compose.yml up
+	docker-compose -f srcs/docker-compose.yml up -d
 
 build:
 	docker-compose -f srcs/docker-compose.yml build
@@ -14,6 +14,9 @@ no-cache:
 
 stop:
 	docker-compose -f srcs/docker-compose.yml stop
+
+down:
+	docker-compose -f srcs/docker-compose.yml down
 
 clean:
 	docker-compose -f srcs/docker-compose.yml down -v
