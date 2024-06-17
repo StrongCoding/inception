@@ -9,6 +9,9 @@ all:
 build:
 	docker-compose -f srcs/docker-compose.yml build
 
+no-cache:
+	docker-compose -f srcs/docker-compose.yml build --no-cache
+
 stop:
 	docker-compose -f srcs/docker-compose.yml stop
 
